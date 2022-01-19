@@ -1,0 +1,55 @@
+import java.util.*;
+
+public class Main { // USING MOORE'S VOTING ALGORITHM IN O(1) SPACE
+
+    // ~~~~~~~~~~~~~~~~~~~~~User Section~~~~~~~~~~~~~~~~~~~~~
+
+    public static void printMajorityElement(int[] arr) {
+        // write your code here
+        int count = 1;
+        int val = arr[0]; // val contains potential majority element 
+        
+        for(int i =1 ;i < arr.length ; i++){
+            int ele = arr[i];
+            if(ele == val){
+                count+=1;
+            }
+            else{
+                count--;
+            }
+            if(count == 0){
+                val = arr[i];
+                count = 1;
+            }
+        }
+        // now check if the element in  val is actually a majority element or not
+        
+        int freq = 0;
+        for(int i=0 ; i < arr.length ; i++){
+            if(arr[i] == val){
+                freq++;
+            }
+        }
+        if((freq) > (arr.length /2)){
+           System.out.println(val);
+        }
+        else{
+            System.out.println("No Majority Element exist");
+        }
+    }
+
+    // ~~~~~~~~~~~~~~~~~~~Input Management~~~~~~~~~~~~~~~~~~~
+
+    public static void main(String[] args) {
+        Scanner scn = new Scanner(System.in);
+        int n = scn.nextInt();
+
+        int[] arr = new int[n];
+
+        for(int i = 0; i < n; i++) {
+            arr[i] = scn.nextInt();
+        }
+
+        printMajorityElement(arr);
+    }
+}
