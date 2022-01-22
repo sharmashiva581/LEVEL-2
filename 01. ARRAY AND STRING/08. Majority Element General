@@ -1,0 +1,45 @@
+import java.util.*;
+
+public class Main {
+    
+    //~~~~~~~~~~~~~~~~User Section~~~~~~~~~~~~~~~~~
+    public static ArrayList<Integer> majorityElement(int[] arr, int k) {
+        // write yout code here
+        ArrayList<Integer> ans = new ArrayList<>();
+        HashMap<Integer , Integer> hm = new HashMap<>();
+        
+        for(int val : arr){
+            if(hm.containsKey(val) == false){
+                hm.put(val , 1);
+            }
+            else{
+                int nf = hm.get(val) +1;
+                hm.put(val , nf);
+            }
+        }
+        for(int key : hm.keySet()){
+            
+            int freq = hm.get(key);
+            
+            if(freq > arr.length/k){
+                ans.add(key);
+            }
+        }
+        
+        Collections.sort(ans); // used to sort an arraylist
+        return ans;
+    }
+    
+    //~~~~~~~~~~~~~~~Input Management~~~~~~~~~~~~~~~
+    public static void main(String[] args) {
+        Scanner scn = new Scanner(System.in);
+        int n = scn.nextInt();
+        int[] arr = new int[n];
+        for(int i = 0; i < n; i++) {
+            arr[i] = scn.nextInt();
+        }
+        int k = scn.nextInt();
+        ArrayList<Integer> res = majorityElement(arr, k);
+        System.out.println(res);
+    }
+}
