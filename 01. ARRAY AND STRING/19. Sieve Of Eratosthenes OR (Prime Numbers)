@@ -6,7 +6,7 @@ public class Main {
     public static void printPrimeUsingSieve(int n) {
         
         // write your code here
-    //   DOING IN COMPLEXITY LESS THAN --> N * ROOT(N) using sieve algo
+    //   DOING IN COMPLEXITY LESS THAN --> N * ROOT(N) using sieve algo we did it in --------> n * (log * log(n)) 
     
     boolean arr[] = new boolean[n+1];
     Arrays.fill(arr, true);
