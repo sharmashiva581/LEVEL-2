@@ -1,0 +1,65 @@
+import java.util.Scanner;
+
+public class Main {
+  public static boolean carPooling(int trips[][], int cap) {
+    // write your code here
+    if(trips.length == 0 ){
+        return true;
+    }
+    
+    int max_value = Integer.MIN_VALUE;
+    for(int r =0 ; r < trips.length ; r++){
+        int ep = trips[r][1];
+        max_value = Math.max(ep , max_value);
+    }
+    
+    int arr[] = new int[max_value+1];
+    
+    // USING RANGE ADDITION +  PREFIX SUM ARRAY TECHNIQUE TO SOLVE THIS QUESTION
+    
+    int i=0;
+    while(i < trips.length){
+        int idx1 = trips[i][0];
+        int idx2 = trips[i][1];
+        int capacity = trips[i][2];
+        
+        arr[idx1] += capacity;
+        arr[idx2] += -capacity;
+        i++;
+    }
+    
+    // NOW CREATE PREFIX SUM ARRAY AND IF ANY PSA VALUE IS GREATER THAN OF GIVEN CAPACITY RETURN FALSE 
+    
+    int psa[] = new int[arr.length];
+    psa[0] = arr[0];
+    for(int j=1 ; j < arr.length ; j++){
+       psa[j] = psa[j-1] + arr[j];
+    }
+      for(int j=0 ; j < arr.length ; j++){
+       if(psa[j] > cap){
+           return false;
+       }
+    }
+    return true;
+    
+  }
+  public static void main(String[] args) {
+    Scanner scn = new Scanner(System.in);
+    int n = scn.nextInt();
+
+    int trips[][] = new int[n][3];
+    for (int i = 0 ; i < n ; i++) {
+      trips[i][0] = scn.nextInt();
+      trips[i][1] = scn.nextInt();
+      trips[i][2] = scn.nextInt();
+    }
+    int cap = scn.nextInt();
+
+    if (carPooling(trips, cap)) {
+      System.out.println("YES");
+    } else {
+      System.out.println("NO");
+    }
+
+  }
+}
