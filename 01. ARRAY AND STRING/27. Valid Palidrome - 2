@@ -1,0 +1,51 @@
+import java.util.*;
+
+public class Main {
+
+  // ~~~~~~~~~~~~~~User Section~~~~~~~~~~~~~~
+  public static boolean validPalindrome(String s) {
+    // write your code here
+    StringBuilder str = new StringBuilder(s);
+    int i=0;
+    int j = s.length()-1;
+    while(i < j){
+        char ch1 = str.charAt(i);
+        char ch2 = str.charAt(j);
+        
+        if(ch1 == ch2){
+            i++;
+            j--;
+        }
+        else{ // now check if after deleting i or j we get our palindrome or not
+           return isPalindrome(i+1 , j , str) ||  isPalindrome(i , j-1 , str); 
+        }
+    }
+   
+    return true;
+  }
+  public static boolean isPalindrome(int i , int j , StringBuilder str){
+     
+      while(i < j){
+            char ch1 = str.charAt(i);
+            char ch2 = str.charAt(j);
+            
+            if(ch1 == ch2){
+                i++;
+                j--;
+            }
+            else{
+               return false;
+            }  
+        }
+        return true;
+      
+  }
+  // ~~~~~~~~~~~~Input Management~~~~~~~~~~~~~~~~
+  public static void main(String[] args) {
+    Scanner scn = new Scanner(System.in);
+    String str = scn.nextLine();
+
+    boolean res = validPalindrome(str);
+    System.out.println(res);
+  }
+}
