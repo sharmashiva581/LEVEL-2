@@ -1,0 +1,31 @@
+import java.util.*;
+
+public class Main {
+
+  // ~~~~~~~~~~~User's Section~~~~~~~~~~~~~
+  public static int consecutiveNumbersSum(int n) {
+    // write your code here
+    int count = 0;
+    
+    // i = no of terms used to represent n
+    // and numerator is the starting term in a representation
+    
+    for(int i=1 ; i*i+i <= 2*n ; i++){
+        int numerator = n- (i*(i-1)/2);
+        
+        if(numerator % i == 0){
+            // means we got a positive integer
+            count++;
+        }
+    }
+    return count;
+  }
+
+  // ~~~~~~~~~Input Management~~~~~~~~~~~~~~
+  public static void main(String[] args) {
+    Scanner scn = new Scanner(System.in);
+    int num = scn.nextInt();
+    int res = consecutiveNumbersSum(num);
+    System.out.println(res);
+  }
+}
