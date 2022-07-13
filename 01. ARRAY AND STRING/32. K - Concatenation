@@ -1,0 +1,51 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+  public static long solution(int[] arr, int k, long sum) {
+    // write your code here
+    int n= arr.length;
+    int arr2[] = new int[n*k];
+    
+    // now perform concatenation
+    int idx = 0;
+    for(int i=0; i < k ; i++){
+        for(int j=0 ; j < n ; j++ ){
+            arr2[idx] = arr[j];
+            idx++;
+        }
+    }
+    
+    return mss(arr2); // find maximum sub array sum and return
+  }
+  public static int mss(int arr[]){
+      int cur_sum = arr[0];
+      int max_sum = arr[0];
+      
+      for(int i= 1; i < arr.length ; i++){
+          if(cur_sum > 0){
+              cur_sum += arr[i];
+          }
+          else{
+              cur_sum = arr[i];
+          }
+          max_sum = Math.max(max_sum , cur_sum);
+      }
+      return max_sum;
+  }
+
+  public static void main(String[] args) {
+    Scanner scn = new Scanner(System.in);
+    int n = scn.nextInt();
+    int[] arr = new int[n];
+    long sum = 0;
+    for (int i = 0; i < arr.length; i++) {
+      arr[i] = scn.nextInt();
+      sum += arr[i];
+    }
+    int k = scn.nextInt();
+    System.out.println(solution(arr, k, sum));
+  }
+
+}
